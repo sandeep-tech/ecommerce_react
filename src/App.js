@@ -7,6 +7,7 @@ import { Provider } from "react-redux";
 import CartProduct from "./Pages/cartProduct";
 import { BrowserRouter as Main, Routes, Route } from "react-router-dom";
 import ProductDetails from "./component/productDetails";
+import DisplayCategaries from "./Pages/displayCategories";
 
 function App() {
   return (
@@ -17,7 +18,10 @@ function App() {
           <Categories />
           <Routes>
             <Route exact path="/" element={<DisplayProduct />} />
-            <Route path="/categories/:category" element={<></>} />
+            <Route
+              path="/categories/:category"
+              element={<DisplayCategaries />}
+            />
             <Route exact path="/cart" element={<CartProduct />} />
             <Route
               exact

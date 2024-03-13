@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const Product = ({ productData, handleAddToCart, moreDetailBtn }) => {
+const Product = ({ productData, handleAddToCart }) => {
   return (
     <>
       {productData.map((productItem) => {
@@ -23,7 +23,7 @@ const Product = ({ productData, handleAddToCart, moreDetailBtn }) => {
             >
               Add to Cart
             </button>
-            <Link to={"productdetails/" + productItem.id}>
+            <Link to={"/productdetails/" + productItem.id}>
               <button className="p-2 m-2 bg-pink-400 rounded-xl w-full">
                 More info..
               </button>

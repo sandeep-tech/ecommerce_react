@@ -21,7 +21,7 @@ const Categories = () => {
           return (
             <ul>
               <li className="p-3">
-                <Link to={`/categories/${item}`}>{item}</Link>
+                <Link to={"categories/" + item}>{item}</Link>
               </li>
             </ul>
           );
