@@ -1,17 +1,61 @@
-// import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Cart from "../component/cart";
+import { deleteProductFromCart, updateProductToCart } from "../store/cartSlice";
 
 const CartProduct = () => {
   const cartData = useSelector((state) => state.cart);
   const productData = useSelector((state) => state.product);
+  const dispatch = useDispatch();
+
+  const deleteAll = () => {
+    dispatch(deleteProductFromCart([]));
+  };
+
+  const deleteCartItem = (id) => {
+    const filterCart = cartData.filter((item) => item.id != id);
+    dispatch(deleteProductFromCart(filterCart));
+  };
+
+  const incrementBtn = (id) => {
+    const cartIncreamentQtyDetails = cartData.map((item) => {
+      if (item.id == id) {
+        return { ...item, qty: item.qty + 1 };
+      }
+      return item;
+    });
+    dispatch(updateProductToCart(cartIncreamentQtyDetails));
+  };
+
+  const decrementBtn = (id, qty) => {
+    if (qty == 1) {
+      alert("Action not possible");
+      return;
+    }
+    const cartDecreamentQtyDetails = cartData.map((item) => {
+      if (item.id == id) {
+        return { ...item, qty: item.qty - 1 };
+      }
+      return item;
+    });
+
+    dispatch(updateProductToCart(cartDecreamentQtyDetails));
+  };
 
   const displayCart = () => {
     const cartDetails = cartData.map((item) => {
       const data = productData.find((prod) => prod.id == item.id);
       return { ...data, qty: item.qty };
     });
-    return <Cart cartDetails={cartDetails} />;
+
+    return (
+      <Cart
+        cartDetails={cartDetails}
+        deleteCartItem={deleteCartItem}
+        deleteAll={deleteAll}
+        incrementBtn={incrementBtn}
+        decrementBtn={decrementBtn}
+      />
+    );
   };
 
   return (

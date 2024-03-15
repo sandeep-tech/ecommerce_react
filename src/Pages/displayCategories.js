@@ -11,12 +11,16 @@ const DisplayCategaries = () => {
   const { category } = useParams();
 
   const handleAddToCart = (id) => {
-    const cartitem = productData.find((item) => item.id == id);
-    const cartItemDetails = [...cartData, cartitem];
-    const cartProduct = cartItemDetails.map((prod) => {
-      return { id: prod.id, qty: 1 };
-    });
-    dispatch(addProductToCart(cartProduct));
+    if (cartData.find((item) => item.id == id)) {
+      alert("Product is Alraedy in Cart");
+    } else {
+      const cartitem = productData.find((item) => item.id == id);
+      const cartItemDetails = [...cartData, cartitem];
+      const cartProduct = cartItemDetails.map((prod) => {
+        return { id: prod.id, qty: 1 };
+      });
+      dispatch(addProductToCart(cartProduct));
+    }
   };
 
   const data = productData.filter((item) => item.category == category);

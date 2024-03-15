@@ -7,7 +7,14 @@ const cartSlice = createSlice({
     addProductToCart: (state, action) => {
       return action.payload;
     },
+    deleteProductFromCart: (state, action) => {
+      return action.payload;
+    },
+    updateProductToCart: (state, action) => {
+      return action.payload;
+    },
   },
 });
-export const { addProductToCart } = cartSlice.actions;
+export const { addProductToCart, deleteProductFromCart, updateProductToCart } =
+  cartSlice.actions;
 export default cartSlice.reducer;
