@@ -1,9 +1,24 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { addProducts } from "../store/productSlice";
 
 const Header = () => {
   const cartData = useSelector((state) => state.cart);
+  const productData = useSelector((state) => state.product);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (productData.length == 0) {
+      fetchProductData();
+    }
+  }, []);
+
+  const fetchProductData = async () => {
+    const data = await fetch("https://fakestoreapi.com/products");
+    const json = await data.json();
+    dispatch(addProducts(json));
+  };
 
   //
   return (
@@ -18,6 +33,12 @@ const Header = () => {
             />
           </Link>
         </div>
+        <Link to="order">
+          <div>Order</div>
+        </Link>
+        <Link to="addproduct">
+          <div>addProduct</div>
+        </Link>
         <div className="mr-10">
           <img
             src="https://static-assets-web.flixcart.com/batman-returns/batman-returns/p/images/header_cart-eed150.svg"

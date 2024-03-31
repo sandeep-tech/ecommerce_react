@@ -7,20 +7,9 @@ import { addProducts } from "../store/productSlice";
 const ProductDetails = () => {
   const productDetails = useSelector((state) => state.product);
   const cartData = useSelector((state) => state.cart);
-  console.log(cartData);
 
   const { id } = useParams();
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (productDetails.length == 0) fetchProductData();
-  }, []);
-
-  const fetchProductData = async () => {
-    const data = await fetch("https://fakestoreapi.com/products");
-    const json = await data.json();
-    dispatch(addProducts(json));
-  };
 
   const handleAddToCart = () => {
     if (cartData.find((item) => item.id == id)) {
@@ -46,7 +35,7 @@ const ProductDetails = () => {
         <p className="font-bold text-lg mt-2">Description :</p>
         <p className="w-7/12">{productDeatilsData.description}</p>
         <p className="my-2">Price : ${productDeatilsData.price}</p>
-        <p>Rating : {productDeatilsData.rating.rate}</p>
+        <p>Rating : {productDeatilsData.rating?.rate}</p>
         <button
           className="p-2 bg-green-200 rounded-md "
           onClick={handleAddToCart}

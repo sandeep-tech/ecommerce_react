@@ -8,6 +8,8 @@ import CartProduct from "./Pages/cartProduct";
 import { BrowserRouter as Main, Routes, Route } from "react-router-dom";
 import ProductDetails from "./component/productDetails";
 import DisplayCategaries from "./Pages/displayCategories";
+import Order from "./Pages/order";
+import AddProduct from "./component/addProduct";
 
 function App() {
   return (
@@ -28,6 +30,8 @@ function App() {
               path="/productdetails/:id"
               element={<ProductDetails />}
             />
+            <Route exact path="/addproduct" element={<AddProduct />} />
+            <Route exact path="/order" element={<Order />} />
           </Routes>
         </Main>
       </Provider>
